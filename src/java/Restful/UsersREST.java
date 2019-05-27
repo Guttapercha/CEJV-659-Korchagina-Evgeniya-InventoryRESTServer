@@ -15,6 +15,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -38,12 +39,22 @@ public class UsersREST {
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
+    public Response getJsonAllUsers() throws SQLException {
+        UsersDAO db = new UsersDAO();
+        ArrayList<Users> us = db.getAllUsers();
+        GenericEntity generic = new GenericEntity<ArrayList<Users>>(us) {};
+        return Response.status(201).entity(generic).build();
+    }
+
+    @GET
+    @Path("all_")
+    @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<Users> getJsonAll() throws SQLException {
         UsersDAO db = new UsersDAO();
         ArrayList<Users> users = db.getAllUsers();
         return users;
-    } 
-    
+    }
+
     @POST
     @Path("login")
     @Produces(MediaType.APPLICATION_JSON)
@@ -56,17 +67,17 @@ public class UsersREST {
         }
         return Response.status(200).entity(output).build();
     }
-    
+
     @POST
     @Path("create")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createUser(Users user) throws SQLException {        
-        String output = "Failed to create a record";        
+    public Response createUser(Users user) throws SQLException {
+        String output = "Failed to create a record";
         UsersDAO db = new UsersDAO();
-        int result =db.createUser(user);
-        if (result!=-1) {
+        int result = db.createUser(user);
+        if (result != -1) {
             output = user.toString();
-        }        
+        }
         return Response.status(200).entity(output).build();
     }
 
