@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `inventory`
 --
-
+DROP TABLE IF EXISTS INVENTORY;
 CREATE TABLE `inventory` (
   `id` int(11) NOT NULL,
   `email` varchar(100) COLLATE utf8_bin NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE `inventory` (
 --
 -- Table structure for table `users`
 --
-
+DROP TABLE IF EXISTS USERS;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `email` varchar(100) COLLATE utf8_bin NOT NULL,

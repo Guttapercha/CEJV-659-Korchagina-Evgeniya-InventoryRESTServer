@@ -74,6 +74,33 @@ public class InventoryDAO {
         return inv;
     }
 
+    
+    public ArrayList<Inventory> getAll() throws SQLException {
+        ArrayList<Inventory> inv = new ArrayList<>();
+        String selectByEmailQuery = "SELECT * from inventory;";
+
+        try (Connection connection = DriverManager.getConnection(url, username, password);) {
+            PreparedStatement pStatement = connection.prepareStatement(selectByEmailQuery);            
+            ResultSet resultSet = pStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Inventory b = new Inventory();
+                b.setId(resultSet.getInt("id"));
+                b.setEmail(resultSet.getString("email"));
+                b.setArtist(resultSet.getString("artist"));
+                b.setAlbum(resultSet.getString("album"));
+                b.setYear(resultSet.getInt("year"));
+                b.setState(resultSet.getString("state"));
+                b.setState_detailed(resultSet.getString("state_detailed"));
+                b.setUpc(resultSet.getString("upc"));
+                b.setNotes(resultSet.getString("notes"));
+                b.setStatus(resultSet.getBoolean("status"));
+                inv.add(b);
+            }
+        }
+        return inv;
+    }
+
     public Inventory findRecordById(int id) throws SQLException {
 
         Inventory b = new Inventory();

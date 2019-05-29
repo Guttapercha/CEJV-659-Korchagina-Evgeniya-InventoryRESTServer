@@ -12,6 +12,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -37,7 +38,27 @@ public class InventoryREST {
     } 
     
     @GET
+    @Path("allall")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ArrayList<Inventory> getJsonAllAll() throws SQLException {
+        InventoryDAO db = new InventoryDAO();
+        ArrayList<Inventory> invs = db.getAll();
+        return invs;
+    } 
+    
+    @GET
     @Path("allbyemail/{email}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getInventoryByEmail(@PathParam("email") String email) throws SQLException {
+        InventoryDAO db = new InventoryDAO();
+        ArrayList<Inventory> us = db.getAllInventoryByEmail(email);
+        GenericEntity generic = new GenericEntity<ArrayList<Inventory>>(us) {};
+        return Response.status(201).entity(generic).build();
+    }
+    
+    
+    @GET
+    @Path("allbyemail_/{email}")
     @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<Inventory> getJsonByEmail(@PathParam("email") String email) throws SQLException {
 
