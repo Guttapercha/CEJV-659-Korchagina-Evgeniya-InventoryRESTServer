@@ -34,7 +34,7 @@ CREATE TABLE `inventory` (
   `artist` varchar(100) COLLATE utf8_bin NOT NULL,
   `album` varchar(100) COLLATE utf8_bin NOT NULL,
   `year` int(11) NOT NULL,
-  `state` varchar(4) COLLATE utf8_bin NOT NULL,
+  `state` varchar(20) COLLATE utf8_bin NOT NULL,
   `state_detailed` varchar(255) COLLATE utf8_bin NOT NULL,
   `upc` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `notes` varchar(255) COLLATE utf8_bin DEFAULT NULL,
