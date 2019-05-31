@@ -95,18 +95,10 @@ COMMIT;
 
 ALTER TABLE `users` ADD UNIQUE(`email`);
 
+ALTER TABLE `inventory` ADD  FOREIGN KEY (`email`) REFERENCES `users`(`email`) 
+ON DELETE CASCADE ON UPDATE CASCADE;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-INSERT INTO `inventory` (`id`, `email`, `artist`, `album`, `year`, `state`, `state_detailed`, `upc`, `notes`) 
-VALUES (NULL, 'me@me', 'E. Presley', 'The moon', '1955', 'G', 'Few sctraches', '', NULL);
-
-INSERT INTO `inventory` (`id`, `email`, `artist`, `album`, `year`, `state`, `state_detailed`, `upc`, `notes`) 
-VALUES (NULL, 'you@you', 'E. Piath', 'Rien', '1976', 'VG', 'like new', '', NULL);
-
-INSERT INTO `users` (`id`, `email`, `firstname`, `lastname`, `street`, `city`, `province`, `country`, `postal_code`, `password`) VALUES (NULL, 'me@me', 'Evgeniya', 
-'Korchagina', '3333-Jean Talon', 'Montreal', 'QC', 'Canada', 'h3r2g1', 'evgeniya');
-
-INSERT INTO `users` (`id`, `email`, `firstname`, `lastname`, `street`, `city`, `province`, `country`, `postal_code`, `password`) VALUES (NULL, 'you@you', 'Alex', 
-'Brown', NULL, NULL, NULL, NULL, NULL, 'alex');
